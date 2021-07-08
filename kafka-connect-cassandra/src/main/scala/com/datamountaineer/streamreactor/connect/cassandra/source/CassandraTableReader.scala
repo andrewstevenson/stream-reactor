@@ -333,7 +333,7 @@ class CassandraTableReader(private val name: String,
     val record = if (config.isUnwrapping) {
       if (config.getFormatType == FormatType.JSON) {
         val keys = config.getWithKeys
-        val v = structColDefs.map(d => d.getName -> row.getObject(d.getName)).toMap
+        val v = structColDefs.map(d => if (d.getType == DataType.timestamp) d.getName -> row.getTimestamp(d.getName).getTime else d.getName -> row.getObject(d.getName)).toMap
         val structValue = Json(DefaultFormats).write(v)
         if(keys.isEmpty) {
           new SourceRecord(sourcePartition, Map(primaryKeyCol -> offset).asJava, topic, Schema.STRING_SCHEMA, structValue)
