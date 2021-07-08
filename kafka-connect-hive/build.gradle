@@ -18,7 +18,7 @@ project(":kafka-connect-hive") {
 
     ext {
         parquetVersion = "1.8.3"
-        hiveVersion = "2.1.1"
+        hiveVersion = "2.3.7"
         joddVersion = "4.1.4"
         hadoopVersion = "2.6.5"
         catsVersion = "1.2.0"
