@@ -35,4 +35,6 @@ include 'kafka-connect-elastic7',
         'kafka-connect-pulsar',
         'kafka-connect-aws-s3',
         'kafka-connect-common',
-        'kafka-connect-testcontainers'
+        'kafka-connect-testcontainers',
+        'kafka-connect-azure-storage',
+        'kafka-connect-azure-servicebus'

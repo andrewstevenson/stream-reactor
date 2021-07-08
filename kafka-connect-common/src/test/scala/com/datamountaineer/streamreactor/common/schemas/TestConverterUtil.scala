@@ -16,9 +16,9 @@
 
 package com.datamountaineer.streamreactor.common.schemas
 
-import com.datamountaineer.kcql.WriteModeEnum
 import com.datamountaineer.streamreactor.common.TestUtilsBase
 import com.datamountaineer.streamreactor.common.config.base.settings.Projections
+import com.datamountaineer.streamreactor.common.errors.{ErrorPolicy, ErrorPolicyEnum}
 import com.datamountaineer.streamreactor.common.schemas.SinkRecordConverterHelper.SinkRecordExtension
 import io.confluent.connect.avro.AvroData
 import org.apache.kafka.connect.data.{Schema, SchemaBuilder, Struct}
@@ -111,13 +111,30 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
         val record =
           new SinkRecord("t", 0, null, null, null, "Should not be here", 0)
         val projections = new Projections(
+          writeMode = Map.empty,
           targets = Map.empty,
           headerFields = Map.empty,
           keyFields = Map.empty,
           valueFields = Map("t" -> Map("*" -> "*")),
           ignoreFields = Map.empty,
           primaryKeys = Map.empty,
-          writeMode = Map.empty
+          ttl = Map.empty,
+          batchSize = Map.empty,
+          autoCreate = Map.empty,
+          autoEvolve = Map.empty,
+          partitionBy = Map.empty,
+          formats = Map.empty,
+          tags = Map.empty,
+          withType = Map.empty,
+          dynamicTarget = Map.empty,
+          keyDelimiters = Map.empty,
+          subscriptions = Map.empty,
+          sessions = Map.empty,
+          keys = Map.empty,
+          acks = Map.empty,
+          errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+          errorRetries = 0,
+          kcqls = Set.empty
         )
         record.newFilteredRecordAsStruct(projections)
       }
@@ -139,7 +156,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
           valueFields = Map("t" -> Map("*" -> "*")),
           ignoreFields = Map("t" -> Set("toremove")),
           primaryKeys = Map.empty,
-          writeMode = Map.empty
+          writeMode = Map.empty,
+          ttl = Map.empty,
+          batchSize = Map.empty,
+          autoCreate = Map.empty,
+          autoEvolve = Map.empty,
+          partitionBy = Map.empty,
+          formats = Map.empty,
+          tags = Map.empty,
+          withType = Map.empty,
+          dynamicTarget = Map.empty,
+          keyDelimiters = Map.empty,
+          subscriptions = Map.empty,
+          sessions = Map.empty,
+          keys = Map.empty,
+          acks = Map.empty,
+          errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+          errorRetries = 0,
+          kcqls = Set.empty
         )
       val combinedRecord = record.newFilteredRecordAsStruct(projections)
 
@@ -165,7 +199,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
           Map("t" -> Map("field1" -> "field1", "field2" -> "fieldRenamed")),
         ignoreFields = Map.empty,
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = record.newFilteredRecordAsStruct(projections)
@@ -194,7 +245,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
                      "field3" -> "field3")),
         ignoreFields = Map.empty,
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = record.newFilteredRecordAsStruct(projections)
@@ -239,7 +307,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
         valueFields = Map("t" -> Map("id" -> "id", "tags" -> "tagsRenamed")),
         ignoreFields = Map("t" -> Set("price")),
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = record.newFilteredRecordAsStruct(projections)
@@ -262,7 +347,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
           valueFields = Map("t" -> Map("id" -> "id", "tags" -> "tagsRenamed")),
           ignoreFields = Map("t" -> Set("price")),
           primaryKeys = Map.empty,
-          writeMode = Map.empty
+          writeMode = Map.empty,
+          ttl = Map.empty,
+          batchSize = Map.empty,
+          autoCreate = Map.empty,
+          autoEvolve = Map.empty,
+          partitionBy = Map.empty,
+          formats = Map.empty,
+          tags = Map.empty,
+          withType = Map.empty,
+          dynamicTarget = Map.empty,
+          keyDelimiters = Map.empty,
+          subscriptions = Map.empty,
+          sessions = Map.empty,
+          keys = Map.empty,
+          acks = Map.empty,
+          errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+          errorRetries = 0,
+          kcqls = Set.empty
         )
 
         record.newFilteredRecordAsStruct(projections)
@@ -289,7 +391,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
         valueFields = Map("t" -> Map("*" -> "*")),
         ignoreFields = Map("t" -> Set("toremove")),
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = record.newFilteredRecordAsStruct(projections)
@@ -321,7 +440,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
           Map("t" -> Map("field1" -> "field1", "field2" -> "fieldRenamed")),
         ignoreFields = Map.empty,
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = record.newFilteredRecordAsStruct(projections)
@@ -353,7 +489,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
           Map("t" -> Map("field1" -> "field1", "field2" -> "fieldRenamed")),
         ignoreFields = Map("t" -> Set("toremove")),
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = record.newFilteredRecordAsStruct(projections)
@@ -385,7 +538,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
         valueFields = Map("t" -> Map("id" -> "id", "tags" -> "tagsRenamed")),
         ignoreFields = Map("t" -> Set("price")),
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = record.newFilteredRecordAsStruct(projections)
@@ -412,7 +582,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
           Map(originalRecord.topic() -> Map("int_field" -> "int_field")),
         ignoreFields = Map.empty,
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = originalRecord.newFilteredRecordAsStruct(projections)
@@ -448,7 +635,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
             .toMap),
         ignoreFields = Map.empty,
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = originalRecord.newFilteredRecordAsStruct(projections)
@@ -478,7 +682,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
         valueFields = Map(originalRecord.topic() -> Map("*" -> "*")),
         ignoreFields = Map.empty,
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = originalRecord.newFilteredRecordAsStruct(projections)
@@ -507,7 +728,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
         valueFields = Map.empty,
         ignoreFields = Map.empty,
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = originalRecord.newFilteredRecordAsStruct(projections)
@@ -536,7 +774,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
         valueFields = Map.empty,
         ignoreFields = Map.empty,
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = originalRecord.newFilteredRecordAsStruct(projections)
@@ -563,7 +818,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
         valueFields = Map.empty,
         ignoreFields = Map.empty,
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = originalRecord.newFilteredRecordAsStruct(projections)
@@ -585,7 +857,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
         valueFields = Map.empty,
         ignoreFields = Map.empty,
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = originalRecord.newFilteredRecordAsStruct(projections)
@@ -603,7 +892,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
         valueFields = Map(originalRecord.topic() -> Map("*" -> "*")),
         ignoreFields = Map(originalRecord.topic() -> Set("int_field")),
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = originalRecord.newFilteredRecordAsStruct(projections)
@@ -651,7 +957,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
                      "field6" -> "field6")),
         ignoreFields = Map.empty,
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = record.newFilteredRecordAsStruct(projections)
@@ -698,7 +1021,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
         valueFields = Map("t" -> Map("field1" -> "field1_alias")),
         ignoreFields = Map.empty,
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = record.newFilteredRecordAsStruct(projections)
@@ -745,7 +1085,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
         valueFields = Map.empty,
         ignoreFields = Map.empty,
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = record.newFilteredRecordAsStruct(projections)
@@ -776,7 +1133,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
         valueFields = Map.empty,
         ignoreFields = Map.empty,
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = record.newFilteredRecordAsStruct(projections)
@@ -825,7 +1199,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
           )),
         ignoreFields = Map.empty,
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = record.newFilteredRecordAsStruct(projections)
@@ -876,7 +1267,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
           )),
         ignoreFields = Map.empty,
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = record.newFilteredRecordAsStruct(projections)
@@ -929,7 +1337,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
           )),
         ignoreFields = Map.empty,
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = record.newFilteredRecordAsStruct(projections)
@@ -982,7 +1407,24 @@ class TestConverterUtil extends TestUtilsBase with ConverterUtil {
           )),
         ignoreFields = Map.empty,
         primaryKeys = Map.empty,
-        writeMode = Map.empty
+        writeMode = Map.empty,
+        ttl = Map.empty,
+        batchSize = Map.empty,
+        autoCreate = Map.empty,
+        autoEvolve = Map.empty,
+        partitionBy = Map.empty,
+        formats = Map.empty,
+        tags = Map.empty,
+        withType = Map.empty,
+        dynamicTarget = Map.empty,
+        keyDelimiters = Map.empty,
+        subscriptions = Map.empty,
+        sessions = Map.empty,
+        keys = Map.empty,
+        acks = Map.empty,
+        errorPolicy = ErrorPolicy(ErrorPolicyEnum.THROW),
+        errorRetries = 0,
+        kcqls = Set.empty
       )
 
       val combinedRecord = record.newFilteredRecordAsStruct(projections)

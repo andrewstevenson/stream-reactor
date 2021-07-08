@@ -34,16 +34,13 @@ import scala.util.{Failure, Success, Try}
 
 object SinkRecordConverterHelper extends StrictLogging {
 
+  lazy val objectMapper = new ObjectMapper()
+
   implicit final class SinkRecordExtension(val record: SinkRecord)
       extends AnyVal {
 
-    def valueToJson(): JsonNode = {
-      simpleJsonConverter.fromConnectData(record.valueSchema(), record.value())
-    }
-
-    def keyToJson(): JsonNode = {
-      simpleJsonConverter.fromConnectData(record.valueSchema(), record.value())
-    }
+    def valueToJson(): JsonNode = simpleJsonConverter.fromConnectData(record.valueSchema(), record.value())
+    def keyToJson(): JsonNode = simpleJsonConverter.fromConnectData(record.valueSchema(), record.value())
 
     /**
       * make new sink record, taking fields

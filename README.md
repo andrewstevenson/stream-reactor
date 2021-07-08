@@ -32,38 +32,49 @@ The following connectors will be deprecated and no longer included in any releas
 * Blockchain
 
 
+## Documentation
+
+Documentation for the connectors can be found [here.](https://docs.lenses.io/4.0/integrations/connectors/)
+
 ### Connectors
 
 **Please take a moment and read the documentation and make sure the software prerequisites are met!!**
 
-|Connector       | Type   | Description                                                                                   | Docs |
-|----------------|--------|-----------------------------------------------------------------------------------------------|------|
-| AWS S3         | Sink   | Copy data from Kafka to AWS S3.                                                     | [Docs](https://docs.lenses.io/4.0/integrations/connectors/stream-reactor/sinks/s3sinkconnector/)             |
-| AzureDocumentDb| Sink   | Copy data from Kafka and Azure Document Db.                                          | [Docs](https://docs.lenses.io/connectors/sink/azuredocdb.html)             |
-| Bloomberg      | Source | Copy data from Bloomberg streams and Kafka.                              | [Docs](https://docs.lenses.io/connectors/source/bloomberg.html)            |
-| Cassandra      | Source | Copy data from Cassandra and Kafka.                          | [Docs](https://docs.lenses.io/connectors/source/cassandra.html)            |
-| *Cassandra     | Sink   | Certified DSE Cassandra, copy data from Kafka to Cassandra.   | [Docs](https://docs.lenses.io/connectors/sink/cassandra.html)              |
-| Coap           | Source | Copy data from IoT Coap endpoints (using Californium) to Kafka.                  | [Docs](https://docs.lenses.io/connectors/source/coap.html)                 |
-| Coap           | Sink   | Copy data from Kafka to IoT Coap endpoints.| [Docs](https://docs.lenses.io/connectors/sink/coap.html)                   |
-| Elastic 6      | Sink   | Copy data from Kafka to Elastic Search 6.x w. tcp or http      | [Docs](https://docs.lenses.io/connectors/sink/elastic6.html)               |
-| FTP/HTTP       | Source | Copy data from FTP/HTTP to Kafka.                       | [Docs](https://docs.lenses.io/connectors/source/ftp.html)                  |
-| Hazelcast      | Sink   | Copy data from Kafka to Hazelcast.                      | [Docs](https://docs.lenses.io/connectors/sink/hazelcast.html)              |
-| HBase          | Sink   | Copy data from Kafka to HBase.                              | [Docs](https://docs.lenses.io/connectors/sink/hbase.html)                  |
-| Hive           | Source | Copy data from Hive/HDFS to Kafka.                             | [Docs](https://docs.lenses.io/connectors/source/hive.html)                 |
-| Hive           | Sink   | Copy data from Kafka to Hive/HDFS                            | [Docs](https://docs.lenses.io/connectors/sink/hive.html)                   |
-| InfluxDb       | Sink   | Copy data from Kafka to InfluxDb.                                  | [Docs](https://docs.lenses.io/4.0/integrations/connectors/stream-reactor/sinks/influxsinkconnector/)|
-| Kudu           | Sink   | Copy data from Kafka to Kudu.                                | [Docs](https://docs.lenses.io/connectors/sink/influx.html)                 |
-| JMS            | Source | Copy data from JMS topics/queues to Kafka.                                   | [Docs](https://docs.lenses.io/connectors/source/jms.html)                  |
-| JMS            | Sink   | Copy data from Kafka to JMS.                                  | [Docs](https://docs.lenses.io/connectors/sink/jms.html)                    |
-| MongoDB        | Sink   | Copy data from Kafka to MongoDB.                                    | [Docs](https://docs.lenses.io/connectors/sink/mongo.html)                  |
-| MQTT           | Source | Copy data from MQTT to Kafka.                                   | [Docs](https://docs.lenses.io/connectors/source/mqtt.html)                 |
-| MQTT           | Sink   | Copy data from Kafka to MQTT.                                     | [Docs](https://docs.lenses.io/connectors/sink/mqtt.html)                   |
-| Pulsar         | Source | Copy data from Pulsar to Kafka.                               | [Docs](https://docs.lenses.io/connectors/source/pulsar.html)                 |
-| Pulsar         | Sink   | Copy data from Kafka to Pulsar.                                 | [Docs](https://docs.lenses.io/connectors/sink/pulsar.html)                   |
-| Redis          | Sink   | Copy data from Kafka to Redis.                              | [Docs](https://docs.lenses.io/connectors/sink/redis.html)                  |
-| ReThinkDB      | Source | Copy data from RethinkDb to Kafka.         | [Docs](https://docs.lenses.io/connectors/source/rethink.html)              |
-| ReThinkDB      | Sink   | Copy data from Kafka to RethinkDb.                      | [Docs](https://docs.lenses.io/connectors/sink/rethink.html)                |
-| VoltDB         | Sink   | Copy data from Kafka to Voltdb.                            | [Docs](https://docs.lenses.io/connectors/sink/voltdb.html)                 |
+|Connector       | Type   | Description                                                                                   |
+|----------------|--------|-----------------------------------------------------------------------------------------------|
+| AWS S3 | Source | Kafka connect source connector for AWS S3 |
+| AWS S3 | Sink | Kafka connect sink connector for AWS S3 |
+| AzureDocumentDb| Sink   | Kafka connect sink connector to subscribe to write to the cloud Azure Document Db.     |
+| AzureTableStorage | Sink   | Kafka connect sink connector for Azure Azure Table Storage.     | 
+| AzureQueueStorage | Source   | Kafka connect source connector for Azure Azure Queue Storage.     |
+| AzureQueueStorage | Sink   | Kafka connect sink connector for Azure Azure Service Bus.     |
+| AzureServiceBus | Source   | Kafka connect source connector for Azure Service Bus.     |
+| AzureServiceBus | Sink   | Kafka connect sink connector for Azure Azure Queue Storage.     |
+| BlockChain     | Source | Kafka connect Blockchain source to subscribe to Blockchain streams and write to Kafka.        |
+| Bloomberg      | Source | Kafka connect source to subscribe to Bloomberg streams and write to Kafka.                    |
+| Cassandra      | Source | Kafka connect Cassandra source to read Cassandra and write to Kafka.                          |
+| *Cassandra     | Sink   | Certified DSE Kafka connect Cassandra sink task to write Kafka topic payloads to Cassandra.   |
+| Coap           | Source | Kafka connect Coap source to read from IoT Coap endpoints using Californium.                  |
+| Coap           | Sink   | Kafka connect Coap sink to write kafka topic payload to IoT Coap endpoints using Californium. |
+| Elastic 6      | Sink   | Kafka connect Elastic Search sink to write payloads to Elastic Search 6.x w. tcp or http      |
+| FTP/HTTP       | Source | Kafka connect FTP and HTTP source to write file data into Kafka topics.                       |
+| Hazelcast      | Sink   | Kafka connect Hazelcast sink to write Kafka topic payloads to Hazelcast.                      |
+| HBase          | Sink   | Kafka connect HBase sink to write Kafka topic payloads to HBase.                              |
+| Hive           | Source | Kafka connect Hive source to read data from Hive/HDFS into Kafka.                             |
+| Hive           | Sink   | Kafka connect Hive sink to read data Kafka and load into Hive/HDFS                            |
+| InfluxDb       | Sink   | Kafka connect InfluxDb sink to write Kafka topic payloads to InfluxDb.                        |
+| Kudu           | Sink   | Kafka connect Kudu sink to write Kafka topic payloads to Kudu.                                |
+| JMS            | Source | Kafka connect JMS source to write from JMS to Kafka topics.                                   |
+| JMS            | Sink   | Kafka connect JMS sink to write Kafka topic payloads to JMS.                                  |
+| MongoDB        | Sink   | Kafka connect MongoDB sink to write Kafka topic payloads to MongoDB.                          |
+| MQTT           | Source | Kafka connect MQTT source to write data from MQTT to Kafka.                                   |
+| MQTT           | Sink   | Kafka connect MQTT sink to write data from Kafka to MQTT.                                     |
+| Pulsar         | Source | Kafka connect Pulsar source to write data from Pulsar to Kafka.                               |
+| Pulsar         | Sink   | Kafka connect Pulsar sink to write data from Kafka to Pulsar.                                 |
+| Redis          | Sink   | Kafka connect Redis sink to write Kafka topic payloads to Redis.                              |
+| ReThinkDB      | Source | Kafka connect RethinkDb source subscribe to ReThinkDB changefeeds and write to Kafka.         |
+| ReThinkDB      | Sink   | Kafka connect RethinkDb sink to write Kafka topic payloads to RethinkDb.                      |
+| VoltDB         | Sink   | Kafka connect Voltdb sink to write Kafka topic payloads to Voltdb.                            |
 
 
 ## Release Notes
@@ -104,9 +115,7 @@ Move to connect-common 2.0.5 that adds complex type support to KCQL
 *   Hive Source
     *    Rename option `connect.hive.hive.metastore` to `connect.hive.metastore`
     *    Rename option `connect.hive.hive.metastore.uris` to `connect.hive.metastore.uris`
-    
-*   Fix Elastic start up NPE
-*   Fix to correct batch size extraction from KCQL on Pulsar    
+
 
 **2.0.0**
 

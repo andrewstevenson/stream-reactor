@@ -41,13 +41,15 @@ import java.util.TimeZone;
 
 /**
  * Implementation of Converter that uses JSON to store schemas and objects.
+ *
+ * Parts taken from Apache Kafka
  */
 public class SimpleJsonConverter {
 
   public static final SimpleDateFormat ISO_DATE_FORMAT= new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
   public static final SimpleDateFormat TIME_FORMAT= new SimpleDateFormat("HH:mm:ss.SSSZ");
   static{
-    ISO_DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));;
+    ISO_DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
   }
   // Convert values in Kafka Connect form into their logical types. These logical converters are discovered by logical type
   // names specified in the field
@@ -225,8 +227,6 @@ public class SimpleJsonConverter {
       throw new DataException("Invalid type for " + schema.type() + ": " + value.getClass());
     }
   }
-
-
 
   private interface JsonToConnectTypeConverter {
     Object convert(Schema schema, JsonNode value);
