@@ -6,9 +6,7 @@ This connector supports loading connector configuration via Yaml.
 
 To specify a profile in your connector config you can use the following setting in your main connector configuration:
 
-    connect.s3.config.profiles=/resources/yaml/profile1.yaml,/resources/yaml/profile2.yaml
-
-Note: To ensure this works you must ensure that the directory in which the configuration files lie is in your classpath.
+    connect.s3.config.profiles=/path/to/yaml/profile1.yaml,/path/to/yaml/profile2.yaml
 
 Multiple configuration profiles can be specified via connector configuration.
 

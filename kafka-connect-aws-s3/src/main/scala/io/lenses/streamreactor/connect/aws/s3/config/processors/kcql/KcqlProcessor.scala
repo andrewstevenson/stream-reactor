@@ -29,7 +29,7 @@ import java.util
   */
 object KcqlProcessor extends LazyLogging {
 
-  def process(configs: List[Map[String, AnyRef]]): Either[Throwable, String] = {
+  def process(configs: List[Map[String, Any]]): Either[Throwable, String] = {
 
     val (error, validCfgs) = configs.map {
       cfg =>
@@ -62,7 +62,7 @@ object KcqlProcessor extends LazyLogging {
       .filter(_.nonEmpty)
   }
 
-  private def getBuilderConfig(config: Map[String, AnyRef]): Either[Throwable, Map[KcqlProp, String]] = {
+  private def getBuilderConfig(config: Map[String, Any]): Either[Throwable, Map[KcqlProp, String]] = {
     config.get(S3ConfigSettings.KCQL_BUILDER) match {
       case Some(value: util.Map[_, _]) =>
         YamlToKcqlMapConverter.convert(value)
@@ -74,7 +74,7 @@ object KcqlProcessor extends LazyLogging {
   }
 
 
-  private def getKcqlConfig(config: Map[String, AnyRef]): Either[Throwable, Map[KcqlProp, String]] = {
+  private def getKcqlConfig(config: Map[String, Any]): Either[Throwable, Map[KcqlProp, String]] = {
     config.get(S3ConfigSettings.KCQL_CONFIG) match {
       case Some(value: String) => StringToKcqlMapConverter.convert(value)
       case _ => Map.empty[KcqlProp, String].asRight

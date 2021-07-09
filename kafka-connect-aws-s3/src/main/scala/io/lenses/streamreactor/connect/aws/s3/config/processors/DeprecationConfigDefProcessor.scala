@@ -36,7 +36,7 @@ class DeprecationConfigDefProcessor extends ConfigDefProcessor with LazyLogging 
     DEP_CUSTOM_ENDPOINT -> CUSTOM_ENDPOINT
   )
 
-  override def process(input: Map[String, AnyRef]): Either[Exception, Map[String, AnyRef]] = {
+  override def process(input: Map[String, Any]): Either[Exception, Map[String, Any]] = {
 
     val mutableInput = mutable.Map(input.toSeq: _*)
     deprecatedProps.foreach {

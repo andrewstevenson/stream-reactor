@@ -17,13 +17,11 @@
 package io.lenses.streamreactor.connect.aws.s3.config
 
 import com.datamountaineer.streamreactor.common.errors.{ErrorPolicy, ErrorPolicyEnum, ThrowErrorPolicy}
-import com.typesafe.scalalogging.LazyLogging
 import enumeratum.{Enum, EnumEntry}
 import io.lenses.streamreactor.connect.aws.s3.config.S3ConfigSettings._
 import org.apache.kafka.common.config.types.Password
 
-import scala.collection.immutable.ListMap
-import scala.collection.{immutable, mutable}
+import scala.collection.immutable
 
 sealed trait AuthMode extends EnumEntry
 
@@ -114,32 +112,50 @@ object Format extends Enum[Format] {
   }
 }
 
-
-
-
-
 object S3Config {
 
   def getString(props: Map[String, _], key: String ): Option[String] = {
-    props.get(key).fold(Option.empty[String]){
-      case v : String => Some(v)
-        case _ => None
+    props.get(key)
+      .collect{
+        case s: String if s.nonEmpty => s
       }
   }
 
   def getPassword(props: Map[String, _], key: String ): Option[String] = {
-    props.get(key).fold(Option.empty[String]){
-      case v : Password => Some(v.value())
-      case _ => None
+    props.get(key)
+      .collect{
+        case p: Password if p.value().nonEmpty => p.value()
+        case s: String if s.nonEmpty => s
     }
   }
 
   def getBoolean(props: Map[String, _], key: String ): Option[Boolean] = {
-    props.get(key).fold(Option.empty[Boolean]){
-      case v : Boolean => Some(v)
-      case _ => None
-    }
+    props.get(key)
+      .collect{
+        case b : Boolean => b
+        case "true" => true
+        case "false" => false
+      }
   }
+
+  def getLong(props: Map[String, _], key: String ): Option[Long] = {
+    props.get(key)
+      .collect{
+        case i : Int => i.toLong
+        case l : Long => l
+        case s : String => s.toLong
+      }
+  }
+
+  def getInt(props: Map[String, _], key: String ): Option[Int] = {
+    props.get(key)
+      .collect{
+        case i : Int => i
+        case l : Long => l.toInt
+        case i : String => i.toInt
+      }
+  }
+
 
   def apply(props: Map[String, _]): S3Config = S3Config(
     getPassword(props, AWS_ACCESS_KEY),
@@ -149,16 +165,20 @@ object S3Config {
     ),
     getString(props, CUSTOM_ENDPOINT),
     getBoolean(props, ENABLE_VIRTUAL_HOST_BUCKETS).getOrElse(false),
-    ErrorPolicy(ErrorPolicyEnum.withName(getString(props, ERROR_POLICY).map(_.toUpperCase()).getOrElse(ERROR_POLICY_DEFAULT))),
+    getErrorPolicy(props),
     RetryConfig(
-      props.getOrElse(NBR_OF_RETRIES, NBR_OF_RETIRES_DEFAULT).toString.toInt,
-      props.getOrElse(ERROR_RETRY_INTERVAL, ERROR_RETRY_INTERVAL_DEFAULT).toString.toLong
+      getInt(props, NBR_OF_RETRIES).getOrElse(NBR_OF_RETIRES_DEFAULT),
+      getLong(props, ERROR_RETRY_INTERVAL).getOrElse(ERROR_RETRY_INTERVAL_DEFAULT)
     ),
     RetryConfig(
-      props.getOrElse(HTTP_NBR_OF_RETRIES, HTTP_NBR_OF_RETIRES_DEFAULT).toString.toInt,
-      props.getOrElse(HTTP_ERROR_RETRY_INTERVAL, HTTP_ERROR_RETRY_INTERVAL_DEFAULT).toString.toLong
-    )
+      getInt(props, HTTP_NBR_OF_RETRIES).getOrElse(HTTP_NBR_OF_RETIRES_DEFAULT),
+      getLong(props, HTTP_ERROR_RETRY_INTERVAL).getOrElse(HTTP_ERROR_RETRY_INTERVAL_DEFAULT)
+    ),
   )
+
+  private def getErrorPolicy(props: Map[String, _]) = {
+    ErrorPolicy(ErrorPolicyEnum.withName(getString(props, ERROR_POLICY).map(_.toUpperCase()).getOrElse(ERROR_POLICY_DEFAULT)))
+  }
 }
 
 case class RetryConfig( numberOfRetries: Int, errorRetryInterval: Long)
@@ -169,7 +189,7 @@ case class S3Config(
                      authMode: AuthMode,
                      customEndpoint: Option[String] = None,
                      enableVirtualHostBuckets: Boolean = false,
-                     errorPolicy: ErrorPolicy = new ThrowErrorPolicy,
+                     errorPolicy: ErrorPolicy = ThrowErrorPolicy(),
                      connectorRetryConfig: RetryConfig = RetryConfig(NBR_OF_RETIRES_DEFAULT, ERROR_RETRY_INTERVAL_DEFAULT),
                      httpRetryConfig: RetryConfig = RetryConfig(HTTP_NBR_OF_RETIRES_DEFAULT, HTTP_ERROR_RETRY_INTERVAL_DEFAULT),
                    )

@@ -72,11 +72,11 @@ object S3ConfigSettings {
   val NBR_OF_RETRIES_DOC = "The maximum number of times to try the write again."
   val NBR_OF_RETIRES_DEFAULT: Int = 20
 
-  val HTTP_ERROR_RETRY_INTERVAL = s"$CONNECTOR_PREFIX.HTTP.$RETRY_INTERVAL_PROP_SUFFIX"
+  val HTTP_ERROR_RETRY_INTERVAL = s"$CONNECTOR_PREFIX.http.$RETRY_INTERVAL_PROP_SUFFIX"
   val HTTP_ERROR_RETRY_INTERVAL_DOC = "If greater than zero, used to determine the delay after which to retry the http request in milliseconds.  Based on an exponential backoff algorithm."
   val HTTP_ERROR_RETRY_INTERVAL_DEFAULT: Long = 50L
 
-  val HTTP_NBR_OF_RETRIES = s"$CONNECTOR_PREFIX.HTTP.$MAX_RETRIES_PROP_SUFFIX"
+  val HTTP_NBR_OF_RETRIES = s"$CONNECTOR_PREFIX.http.$MAX_RETRIES_PROP_SUFFIX"
   val HTTP_NBR_OF_RETRIES_DOC = "Number of times to retry the http request, in the case of a resolvable error on the server side."
   val HTTP_NBR_OF_RETIRES_DEFAULT: Int = 5
 }

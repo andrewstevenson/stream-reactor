@@ -16,12 +16,22 @@
 
 package io.lenses.streamreactor.connect.aws.s3.config.processors
 
-/**
-  * ConfigDefProcessor provides an interface to process the configs on entry
-  * into the sink.
-  */
-trait ConfigDefProcessor {
+import com.typesafe.scalalogging.LazyLogging
 
-  def process(input: Map[String, Any]): Either[Throwable, Map[String, Any]]
+import java.io.File
+import scala.util.Try
+
+object ClasspathResourceResolver extends LazyLogging {
+
+  def getResourcesDirectory(): Either[Throwable, String] = {
+    val url = classOf[YamlProfileProcessorTest].getResource("/profiles/")
+    Try {
+      val uri = url.toURI
+      logger.info("Profile uri: {}", uri)
+      val profilePath = new File(uri).getAbsolutePath
+      logger.info("Profile path: {}", profilePath)
+      profilePath
+    }.toEither
+  }
 
 }

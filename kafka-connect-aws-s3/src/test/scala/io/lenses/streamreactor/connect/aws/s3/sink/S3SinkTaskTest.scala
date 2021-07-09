@@ -21,6 +21,7 @@ import au.com.bytecode.opencsv.CSVReader
 import cats.implicits._
 import io.lenses.streamreactor.connect.aws.s3.config.AuthMode
 import io.lenses.streamreactor.connect.aws.s3.config.S3ConfigSettings._
+import io.lenses.streamreactor.connect.aws.s3.config.processors.ClasspathResourceResolver
 import io.lenses.streamreactor.connect.aws.s3.formats.{AvroFormatReader, BytesFormatWriter, ParquetFormatReader}
 import io.lenses.streamreactor.connect.aws.s3.sink.utils.S3ProxyContext.{Credential, Identity}
 import io.lenses.streamreactor.connect.aws.s3.sink.utils.S3TestPayloadReader._
@@ -1455,13 +1456,16 @@ class S3SinkTaskTest extends AnyFlatSpec with Matchers with S3TestConfig with Mo
 
   }
 
-
   "S3SinkTask" should "read from profile" in {
 
+    val profileDir = ClasspathResourceResolver.getResourcesDirectory() match {
+      case Left(ex) => fail("cannot get resources dir", ex)
+      case Right(value) => value
+    }
     val task = new S3SinkTask()
 
     val props = Map(
-      PROFILES -> s"/profiles/inttest1.yaml,/profiles/inttest2.yaml"
+      PROFILES -> s"$profileDir/inttest1.yaml,$profileDir/inttest2.yaml"
     ).asJava
 
     task.start(props)

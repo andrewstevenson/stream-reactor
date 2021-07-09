@@ -20,7 +20,7 @@ package io.lenses.streamreactor.connect.aws.s3.config
 import cats.implicits.catsSyntaxEitherId
 import com.datamountaineer.streamreactor.common.config.base.traits.{BaseConfig, ConnectionSettings, ErrorPolicySettings, KcqlSettings, NumberRetriesSettings, UserSettings}
 import com.typesafe.scalalogging.LazyLogging
-import io.lenses.streamreactor.connect.aws.s3.config.processors.{ConfigDefProcessor, DeprecationConfigDefProcessor, YamlProfileProcessor}
+import io.lenses.streamreactor.connect.aws.s3.config.processors.{ConfigDefProcessor, DeprecationConfigDefProcessor, LowerCaseKeyConfigDefProcessor, YamlProfileProcessor}
 import io.lenses.streamreactor.connect.aws.s3.model.S3WriteMode.{BuildLocal, Streamed}
 
 import java.util
@@ -146,7 +146,7 @@ object S3ConfigDef {
 
 class S3ConfigDef() extends ConfigDef with LazyLogging {
 
-  val processorChain: List[ConfigDefProcessor] = List(new DeprecationConfigDefProcessor, new YamlProfileProcessor)
+  private val processorChain: List[ConfigDefProcessor] = List(new LowerCaseKeyConfigDefProcessor, new DeprecationConfigDefProcessor, new YamlProfileProcessor)
 
   override def parse(jProps: util.Map[_, _]): util.Map[String, AnyRef] = {
     val scalaProps: Map[Any, Any] = jProps.asScala.toMap
@@ -165,10 +165,10 @@ class S3ConfigDef() extends ConfigDef with LazyLogging {
     }
   }
 
-  def writeInOrder(remappedProps: Map[String, AnyRef]) : ListMap[String,AnyRef] = ListMap(remappedProps.toSeq.sortBy(_._1):_*)
+  def writeInOrder(remappedProps: Map[String, Any]) : ListMap[String,Any] = ListMap(remappedProps.toSeq.sortBy(_._1):_*)
 
-  def processStringKeyedProperties(stringProps: Map[String,AnyRef]): Either[Throwable, Map[String, AnyRef]] = {
-    var remappedProps: Map[String, AnyRef] = stringProps
+  def processStringKeyedProperties(stringProps: Map[String,Any]): Either[Throwable, Map[String, Any]] = {
+    var remappedProps: Map[String, Any] = stringProps
     for (proc <- processorChain) {
       logger.info("START: Executing ConfigDef processor {} with props {}", proc.getClass.getSimpleName, writeInOrder(remappedProps))
       proc.process(remappedProps) match {

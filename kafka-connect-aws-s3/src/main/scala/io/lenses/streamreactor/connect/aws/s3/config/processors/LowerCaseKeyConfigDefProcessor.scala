@@ -16,12 +16,16 @@
 
 package io.lenses.streamreactor.connect.aws.s3.config.processors
 
+import cats.implicits.catsSyntaxEitherId
+
 /**
-  * ConfigDefProcessor provides an interface to process the configs on entry
-  * into the sink.
+  * Ensures the keys coming into the sink are all lower cased.
   */
-trait ConfigDefProcessor {
-
-  def process(input: Map[String, Any]): Either[Throwable, Map[String, Any]]
-
+class LowerCaseKeyConfigDefProcessor extends ConfigDefProcessor {
+  override def process(input: Map[String, Any]): Either[Throwable, Map[String, Any]] = {
+    input.map{
+      case (k : String, v) if k.toLowerCase.startsWith("connect.s3") => (k.toLowerCase, v)
+      case (k, v) => (k, v)
+    }.asRight
+  }
 }
